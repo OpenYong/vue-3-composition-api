@@ -19,68 +19,51 @@
   />
 </template>
 
-<script>
+<script setup>
 import YummyMeal from "./components/YummyMeal.vue";
 import { ref, reactive, watch, provide, onMounted } from "vue";
 
-export default {
-  components: {
-    YummyMeal,
-  },
-  setup() {
-    const currencySymbol = ref("$");
+const currencySymbol = ref("$");
 
-    provide("currencySymbol", currencySymbol);
+provide("currencySymbol", currencySymbol);
 
-    const name = ref("용녀 식당");
+const name = ref("용녀 식당");
 
-    const cart = reactive([]);
+const cart = reactive([]);
 
-    const meal = reactive({
-      name: "Bento 🍱",
-      price: 9,
-    });
+const meal = reactive({
+  name: "Bento 🍱",
+  price: 9,
+});
 
-    const meals = reactive([
-      { name: "Bento 🍱", price: 9 },
-      { name: "Sushi 🍣", price: 12 },
-      { name: "Curry 🍛", price: 15 },
-    ]);
+const meals = reactive([
+  { name: "Bento 🍱", price: 9 },
+  { name: "Sushi 🍣", price: 12 },
+  { name: "Curry 🍛", price: 15 },
+]);
 
-    const placeOrder = () => alert("Your order has been placed!");
+const placeOrder = () => alert("Your order has been placed!");
 
-    const addItemToCart = (item) => {
-      cart.push(item);
-    };
-
-    const removeWatcher = watch(
-      [() => [...cart]], // 객체와 배열은 복사본을 만들어서 watch에 전달
-      (newValue, oldValue) => {
-        alert(newValue.join("\n"));
-      }
-    );
-
-    // mounted 라이프사이클 훅
-    onMounted(() => {
-      console.log("mounted", name.value);
-    });
-
-    // created 라이프사이클 훅
-    // setup 함수가 실행되고 나서 실행됨
-    // setup 함수가 실행되기 전에는 ref, reactive, provide, watch, onMounted 등이 정의되지 않음
-    console.log("created", name.value);
-
-    return {
-      name,
-      placeOrder,
-      addItemToCart,
-      meal,
-      meals,
-      removeWatcher,
-      currencySymbol,
-    };
-  },
+const addItemToCart = (item) => {
+  cart.push(item);
 };
+
+const removeWatcher = watch(
+  [() => [...cart]], // 객체와 배열은 복사본을 만들어서 watch에 전달
+  (newValue, oldValue) => {
+    alert(newValue.join("\n"));
+  }
+);
+
+// mounted 라이프사이클 훅
+onMounted(() => {
+  console.log("mounted", name.value);
+});
+
+// created 라이프사이클 훅
+// setup 함수가 실행되고 나서 실행됨
+// setup 함수가 실행되기 전에는 ref, reactive, provide, watch, onMounted 등이 정의되지 않음
+console.log("created", name.value);
 </script>
 
 <style scoped></style>

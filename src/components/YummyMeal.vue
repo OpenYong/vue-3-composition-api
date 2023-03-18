@@ -6,22 +6,18 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import YummyMealPrice from "./YummyMealPrice.vue";
 
-export default {
-  props: {
-    name: String,
-    price: Number,
-  },
-  setup(props, { emit }) {
-    const addToCart = () => {
-      emit("addToCart", props.name);
-    };
+const emit = defineEmits(["addToCart"]);
 
-    return { addToCart };
-  },
-  components: { YummyMealPrice },
+const props = defineProps({
+  name: String,
+  price: Number,
+});
+
+const addToCart = () => {
+  emit("addToCart", props.name);
 };
 </script>
 
