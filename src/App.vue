@@ -18,7 +18,7 @@ export default {
 
     const meal = reactive({
       name: "Bento 🍱",
-      price: 9.99,
+      price: 9,
     });
 
     const placeOrder = () => {

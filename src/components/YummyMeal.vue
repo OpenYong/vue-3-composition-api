@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>{{ name }}</h1>
-    {{ price }}
+    <h2>{{ name }}</h2>
+    {{ pricePrettySentence }}
   </div>
   <button @click="addToCart">추가하기</button>
 </template>
 
 <script>
+import { computed } from "vue";
 export default {
   props: {
     name: String,
@@ -14,14 +15,17 @@ export default {
   },
 
   setup(props, { emit }) {
-    // console.log(props.name);
-    // console.log(props.price);
-
     const addToCart = () => {
       emit("addToCart", props.name);
     };
 
-    return { addToCart };
+    const pricePretty = computed(() => `$${props.price.toFixed(2)}`);
+
+    const pricePrettySentence = computed(
+      () => `가격은 ${pricePretty.value} 입니다.`
+    );
+
+    return { addToCart, pricePretty, pricePrettySentence };
   },
 };
 </script>
