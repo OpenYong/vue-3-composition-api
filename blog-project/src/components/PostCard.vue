@@ -1,16 +1,6 @@
 <template>
   <div
-    class="
-      flex
-      m-2
-      gap-2
-      items-center
-      shadow-md
-      w-1/4
-      flex-grow
-      rounded
-      overflow-hidden
-    "
+    class="flex m-2 gap-2 items-center shadow-md w-1/4 flex-grow rounded overflow-hidden"
     style="border: 1px solid #eee"
   >
     <img
@@ -28,5 +18,5 @@
 const props = defineProps({
   post: Object,
 });
-const post = { ...props.post };
+const post = { ...props.post }; // 객체 props를 사용하기 위해 복사 후 사용
 </script>
