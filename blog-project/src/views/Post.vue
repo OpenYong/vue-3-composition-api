@@ -7,8 +7,12 @@
 </template>
 <script setup>
 import usePost from "../composables/usePost";
+import { useRoute } from "vue-router";
+
 const { post, fetchOne } = usePost();
-fetchOne(2);
+const route = useRoute();
+
+fetchOne(route.params.id);
 const user = {
   name: "Leanne Graham",
 };
