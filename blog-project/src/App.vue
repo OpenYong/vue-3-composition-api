@@ -3,22 +3,15 @@
     <router-link :to="{ name: 'Home' }">Snazzy Fake Blog</router-link>
   </nav>
   <div class="container">
-    <router-view v-slot="{ Component }">
-      <template v-if="Component">
-        <suspense>
-          <template #default>
-            <component :is="Component"></component>
-          </template>
-          <template #fallback="">
-            <div>로딩...</div>
-          </template>
-        </suspense>
-      </template>
-    </router-view>
+    <router-view></router-view>
+    <div v-if="isLoading">로딩...</div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import usePageRequest from "./composables/usePageRequest";
+const { isLoading } = usePageRequest();
+</script>
 <style lang="css">
 .container {
   max-width: 960px;
