@@ -2,8 +2,8 @@
   <div>
     <h2>{{ name }}</h2>
     {{ pricePrettySentence }}
+    <button @click="addToCart">추가하기</button>
   </div>
-  <button @click="addToCart">추가하기</button>
 </template>
 
 <script>
