@@ -21,7 +21,7 @@
 
 <script>
 import YummyMeal from "./components/YummyMeal.vue";
-import { ref, reactive, watch, provide } from "vue";
+import { ref, reactive, watch, provide, onMounted } from "vue";
 
 export default {
   components: {
@@ -59,6 +59,16 @@ export default {
         alert(newValue.join("\n"));
       }
     );
+
+    // mounted 라이프사이클 훅
+    onMounted(() => {
+      console.log("mounted", name.value);
+    });
+
+    // created 라이프사이클 훅
+    // setup 함수가 실행되고 나서 실행됨
+    // setup 함수가 실행되기 전에는 ref, reactive, provide, watch, onMounted 등이 정의되지 않음
+    console.log("created", name.value);
 
     return {
       name,
