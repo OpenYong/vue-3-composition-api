@@ -3,6 +3,14 @@
   <input v-model="name" type="text" />
   <button @click="placeOrder">주문</button>
   <button @click="removeWatcher">카드 알람 끄기</button>
+
+  <label for="currencySymbol">통화 선택</label>
+  <select id="currencySymbol" v-model="currencySymbol">
+    <option value="$">$</option>
+    <option value="€">€</option>
+    <option value="£">£</option>
+  </select>
+
   <YummyMeal
     v-for="meal in meals"
     :name="meal.name"
@@ -13,13 +21,17 @@
 
 <script>
 import YummyMeal from "./components/YummyMeal.vue";
-import { ref, reactive, watch } from "vue";
+import { ref, reactive, watch, provide } from "vue";
 
 export default {
   components: {
     YummyMeal,
   },
   setup() {
+    const currencySymbol = ref("$");
+
+    provide("currencySymbol", currencySymbol);
+
     const name = ref("용녀 식당");
 
     const cart = reactive([]);
@@ -48,7 +60,15 @@ export default {
       }
     );
 
-    return { name, placeOrder, addItemToCart, meal, meals, removeWatcher };
+    return {
+      name,
+      placeOrder,
+      addItemToCart,
+      meal,
+      meals,
+      removeWatcher,
+      currencySymbol,
+    };
   },
 };
 </script>
